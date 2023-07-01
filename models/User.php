@@ -6,11 +6,11 @@ use yii\db\ActiveRecord;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
+//    public $id;
+//    public $username;
+//    public $password;
+//    public $authKey;
+//    public $accessToken;
 
     private static $users = [
         '100' => [
@@ -42,7 +42,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
 //        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
 //        self::find()->where(['id'=>$id])->one();
-        self::findOne($id);
+        return self::findOne($id);
     }
 
     /**
@@ -75,7 +75,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 //        }
 //
 //        return null;
-        self::find()->where(['username'=> $username])->one();
+        return self::find()->where(['username'=> $username])->one();
 
     }
 
