@@ -87,7 +87,8 @@ class SiteController extends Controller
         ]);
     }
 
-    public function  actionSignUp(){
+    public function actionSignUp()
+    {
         $model = new SignUpForm();
         if ($model->load(Yii::$app->request->post()) && $model->signUp()){
             return $this->redirect(Yii::$app->homeUrl);
