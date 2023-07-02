@@ -22,7 +22,7 @@ class SignUpForm extends Model
 
     public function signUp(){
         $user = new Users();
-        $user-> $username= $this->username;
+        $user->username= $this->username;
         $user->password = \Yii::$app->security->generatePasswordHash($this->password);
         $user->access_token= \Yii::$app->security->generateRandomString();
         $user->auth_key = \Yii::$app->security->generateRandomString();
