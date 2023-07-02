@@ -15,7 +15,7 @@ class SignUpForm extends Model
     {
         return [
             [['username', 'password','password_repeat'],'required'],
-            [['username', 'password'] , 'string', 'min'=>4, 'max'=>16],
+            [['username', 'password'],'string', 'min'=>4, 'max'=>16],
             ['password_repeat', 'compare', 'compareAttribute'=>'password']
         ];
     }
