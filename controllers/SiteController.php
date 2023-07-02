@@ -87,7 +87,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionSignUp()
+    public function actionSignup()
     {
         $model = new SignUpForm();
         if ($model->load(Yii::$app->request->post()) && $model->signUp()){
