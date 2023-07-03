@@ -1,12 +1,25 @@
 <?php
 
 namespace app\models;
+use Yii;
+use yii\db\ActiveRecord;
+use Yii\web\IdentityInterface;
 
-use yii;
-use yii\web\IdentityInterface;
 
-class User extends ActiveRecord implements \yii\web\IdentityInterface
+
+/**
+ * This is the model class for table "users".
+ *
+ * @property int $id
+ * @property string $username
+ * @property string $password
+ * @property string $auth_key
+ * @property string $access_token
+ */
+class User extends ActiveRecord implements IdentityInterface
 {
+
+
 //    public $id;
 //    public $username;
 //    public $password;
@@ -23,6 +36,17 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     /**
      * {@inheritdoc}
      */
+
+    public function rules()
+    {
+        return [
+            [['username', 'password', 'auth_key', 'access_token'], 'required'],
+            [['username'], 'string', 'max' => 55],
+            [['password', 'auth_key', 'access_token'], 'string', 'max' => 255],
+        ];
+    }
+
+
     public static function findIdentity($id)
     {
 //        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
@@ -33,6 +57,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     /**
      * {@inheritdoc}
      */
+
     public static function findIdentityByAccessToken($token, $type = null)
     {
 //        foreach (self::$users as $user) {
@@ -42,7 +67,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 //        }
 //
 //        return null;
-        return self::find()->where(['access_token'=>$token])->one();
+        return self::find()->where(['access_token' => $token])->one();
     }
 
     /**
@@ -60,7 +85,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 //        }
 //
 //        return null;
-        return self::find()->where(['username'=> $username])->one();
+        return self::find()->where(['username' => $username])->one();
 
     }
 
@@ -96,6 +121,6 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return Yii::$app->security->validatePassword($password, $this->$password);
     }
 }

@@ -3,8 +3,8 @@
 namespace app\models;
 
 use Yii;
-use yii\web\IdentityInterface;
-
+use Yii\web\IdentityInterface;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "users".
@@ -15,7 +15,7 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property string $access_token
  */
-class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class Users extends ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -124,6 +124,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+//        return $this->password === $password;
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 }
