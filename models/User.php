@@ -3,7 +3,7 @@
 namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
-use Yii\web\IdentityInterface;
+use yii\web\IdentityInterface;
 
 
 
