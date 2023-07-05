@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+namespace app\controllers;
 
 use app\models\article;
 use app\models\ArticleSearch;
